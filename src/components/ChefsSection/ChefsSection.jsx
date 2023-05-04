@@ -5,8 +5,11 @@ const ChefsSection = ({ info }) => {
   const { name, picture, experience, num_recipes, likes } = info;
   console.log(name);
   return (
-    <div className="row">
-      <Card className="cols-2" style={{ width: "18rem" }}>
+    <div>
+      <Card
+        className="grid-col-3"
+        style={{ width: "18rem", backgroundColor: "lightpink" }}
+      >
         <Card.Img variant="top" src={picture} />
         <Card.Body>
           <h4>{name}</h4>

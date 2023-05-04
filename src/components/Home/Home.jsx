@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Banner from "../Banner/Banner";
 import ChefsSection from "../ChefsSection/ChefsSection";
+import { Row } from "react-bootstrap";
 const Home = () => {
   const [infos, setInfos] = useState([]);
 
@@ -13,15 +14,20 @@ const Home = () => {
       .catch((error) => console.error(error));
   }, []);
   return (
-    <div className="text-center">
+    <div>
       <Banner></Banner>
-      <h1>
-        Know The <span className="text-success">CHEFS</span>{" "}
-      </h1>
-      <div>
-        {infos.map((info) => (
-          <ChefsSection key={info.id} info={info}></ChefsSection>
-        ))}
+      <div className="text-center mt-4">
+        <h1>
+          Know The <span className="text-success">CHEFS</span>{" "}
+        </h1>
+        <div>
+          {" "}
+          <Row />
+          <cols />
+          {infos.map((info) => (
+            <ChefsSection key={info.id} info={info}></ChefsSection>
+          ))}
+        </div>
       </div>
     </div>
   );
