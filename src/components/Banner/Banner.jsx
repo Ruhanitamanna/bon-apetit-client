@@ -4,7 +4,7 @@ const Banner = () => {
   return (
     <div>
       <div className="container mt-4" style={{ backgroundColor: "lightpink" }}>
-        <div className="d-flex justify-content-between p-4 ">
+        <div className="d-lg-flex justify-content-between p-4 ">
           <div>
             <h1>
               <span className="text-success">FOOD</span>

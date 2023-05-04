@@ -10,7 +10,7 @@ import {
 const Footer = () => {
   return (
     <div className="bg-dark text-white p-4 container">
-      <div className=" d-flex  justify-content-between">
+      <div className=" d-lg-flex  justify-content-between">
         <ul>
           <li>FAQ</li>
           <li>Feedback</li>

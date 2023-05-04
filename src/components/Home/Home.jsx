@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Banner from "../Banner/Banner";
 import ChefsSection from "../ChefsSection/ChefsSection";
-import { Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
+
 const Home = () => {
   const [infos, setInfos] = useState([]);
 
@@ -14,16 +15,20 @@ const Home = () => {
       .catch((error) => console.error(error));
   }, []);
   return (
-    <div>
+    <div className="text-center">
       <Banner></Banner>
-      <div className=" text-center mt-4">
-        <h1>
-          Know The <span className="text-success">CHEFS</span>
-        </h1>
-
-        <div>
+      <h1 className="mt-4">
+        Know The <span className="text-success">CHEFS</span>
+      </h1>
+      <div
+        className="container text-center m-4 p-4 "
+        style={{ backgroundColor: "lavenderblush" }}
+      >
+        <div className="row">
           {infos.map((info) => (
-            <ChefsSection key={info.id} info={info}></ChefsSection>
+            <div className=" col-lg-4 col-md-6 col-sm-12 my-4">
+              <ChefsSection key={info.id} info={info}></ChefsSection>
+            </div>
           ))}
         </div>
       </div>

@@ -4,28 +4,23 @@ import { Link } from "react-router-dom";
 
 const ChefsSection = ({ info }) => {
   const { name, picture, experience, num_recipes, likes } = info;
-  console.log(name);
+
   return (
-    <div className="Container">
-      <div className="Row">
-        <Card
-          className="col-sm-6 col-lg-4"
-          style={{ width: "18rem", backgroundColor: "lightpink" }}
-        >
-          <Card.Img variant="top" src={picture} />
-          <Card.Body>
-            <h4>{name}</h4>
-            <div>
-              <p>{experience} Years of experience</p>
-              <p>{num_recipes} Recipes</p>
-              <p>{likes} likes</p>
-            </div>
-            <Link to="/recipePage">
-              <Button variant="success">View Recipes</Button>
-            </Link>
-          </Card.Body>
-        </Card>
-      </div>
+    <div>
+      <Card style={{ width: "18rem", backgroundColor: "lightpink" }}>
+        <Card.Img variant="top" src={picture} />
+        <Card.Body>
+          <h4>{name}</h4>
+          <div>
+            <p>{experience} Years of experience</p>
+            <p>{num_recipes} Recipes</p>
+            <p>{likes} likes</p>
+          </div>
+          <Link to="/recipePage">
+            <Button variant="success">View Recipes</Button>
+          </Link>
+        </Card.Body>
+      </Card>
     </div>
   );
 };
