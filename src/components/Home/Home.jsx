@@ -16,14 +16,12 @@ const Home = () => {
   return (
     <div>
       <Banner></Banner>
-      <div className="text-center mt-4">
+      <div className=" text-center mt-4">
         <h1>
-          Know The <span className="text-success">CHEFS</span>{" "}
+          Know The <span className="text-success">CHEFS</span>
         </h1>
+
         <div>
-          {" "}
-          <Row />
-          <cols />
           {infos.map((info) => (
             <ChefsSection key={info.id} info={info}></ChefsSection>
           ))}
