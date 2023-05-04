@@ -9,6 +9,7 @@ import Blog from "./components/Blog/Blog.jsx";
 import Login from "./components/Login/Login.jsx";
 import Registration from "./components/Registration/Registration.jsx";
 import RecipePage from "./components/RecipePage/RecipePage.jsx";
+import ErrorPage from "./components/ErrorPage/ErrorPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/recipePage",
         element: <RecipePage></RecipePage>,
+      },
+      {
+        path: "*",
+        element: <ErrorPage></ErrorPage>,
       },
     ],
   },
