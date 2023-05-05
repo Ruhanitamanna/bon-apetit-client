@@ -7,7 +7,7 @@ const ChefsSection = ({ info }) => {
 
   return (
     <div>
-      <Card style={{ width: "18rem", backgroundColor: "lightpink" }}>
+      <Card style={{ width: "18rem", backgroundColor: "lavenderblush" }}>
         <Card.Img variant="top" src={picture} />
         <Card.Body>
           <h4>{name}</h4>

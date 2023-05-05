@@ -12,8 +12,8 @@ const Banner = () => {
             </h1>
             <br />
             <h3>
-              Explore The Variety Of
-              <span className="text-success">Italian</span> Cousin
+              experience the joy of
+              <span className="text-success">ITALIAN CUISINE</span>
             </h3>
             <br />
             <br />

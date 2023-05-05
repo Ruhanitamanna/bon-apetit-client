@@ -1,5 +1,0 @@
-.card{
-    background-color: aqua;
-    display: grid;
-    grid-template-columns: repeat(3fr,1);
-}

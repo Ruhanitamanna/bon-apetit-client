@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ActiveLink from "../ActiveLink/ActiveLink";
+import { AuthContext } from "../Providers/AuthProvider";
+import { FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div>
       <Navbar bg="dark" variant="dark">
@@ -22,14 +25,27 @@ const Header = () => {
               Blog
             </ActiveLink>
           </Nav>
-          <Navbar.Brand href="#home">Bon Appétit</Navbar.Brand>
+          <Navbar.Brand href="#home">
+            <h1>Bon Appétit</h1>
+          </Navbar.Brand>
 
-          <Link to="/login">
+          {user && (
+            <Nav.Link className="text-white" href="#deets">
+              <FaUserCircle />
+            </Nav.Link>
+          )}
+
+          {user ? (
             <Button type="button" className="btn btn-success">
-              {" "}
-              Login
+              Log out
             </Button>
-          </Link>
+          ) : (
+            <Link to="/login">
+              <Button type="button" className="btn btn-success">
+                Login
+              </Button>
+            </Link>
+          )}
         </Container>
       </Navbar>
     </div>

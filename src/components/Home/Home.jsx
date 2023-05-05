@@ -3,6 +3,8 @@ import "./Home.css";
 import Banner from "../Banner/Banner";
 import ChefsSection from "../ChefsSection/ChefsSection";
 import { Container, Row } from "react-bootstrap";
+import SpringItems from "../SpringItems/SpringItems";
+import ReviewPage from "../ReviewPage/ReviewPage";
 
 const Home = () => {
   const [infos, setInfos] = useState([]);
@@ -20,10 +22,7 @@ const Home = () => {
       <h1 className="mt-4">
         Know The <span className="text-success">CHEFS</span>
       </h1>
-      <div
-        className="container text-center m-4 p-4 "
-        style={{ backgroundColor: "lavenderblush" }}
-      >
+      <div className="container text-center m-4 p-4 ">
         <div className="row">
           {infos.map((info) => (
             <div className=" col-lg-4 col-md-6 col-sm-12 my-4">
@@ -32,6 +31,8 @@ const Home = () => {
           ))}
         </div>
       </div>
+      <SpringItems></SpringItems>
+      <ReviewPage></ReviewPage>
     </div>
   );
 };

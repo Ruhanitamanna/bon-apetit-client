@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Button, Container, Form } from "react-bootstrap";
 import {
   GithubAuthProvider,
   GoogleAuthProvider,
@@ -9,15 +9,30 @@ import {
 } from "firebase/auth";
 import app from "../../Firebase/Firebase.config";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const Login = () => {
+  const { logIn } = useContext(AuthContext);
   const [user, setUser] = useState(null);
   const auth = getAuth(app);
   const googleAuthProvider = new GoogleAuthProvider();
   const githubAuthProvider = new GithubAuthProvider();
 
-  const handleEmailLogin = () => {
-    console.log("clicked");
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+
+    logIn(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const handleGoogleLogin = () => {
     signInWithPopup(auth, googleAuthProvider)
@@ -42,80 +57,57 @@ const Login = () => {
       });
   };
 
-  const handleLogOut = () => {
-    signOut(auth)
-      .then((result) => {
-        console.log(result);
-        setUser(null);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   return (
     <div className="mx-auto w-50 mt-5 ">
       <h2>Log in options</h2>
 
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
+      <Container>
+        <Form onSubmit={handleLogin}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control type="email" name="email" placeholder="Enter email" />
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-      {user ? (
-        <Button
-          onClick={handleLogOut}
-          className="m-4"
-          variant="outline-warning"
-        >
-          Log Out
-        </Button>
-      ) : (
-        <div>
-          <Button
-            onClick={handleEmailLogin}
-            className="m-4"
-            variant="outline-success"
-          >
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label="Check me out" />
+          </Form.Group>
+          <Button variant="primary" type="submit">
             Log In
           </Button>
-          <br />
-          <Button
-            onClick={handleGoogleLogin}
-            className="m-4"
-            variant="outline-success"
-          >
-            Google sign-in
-          </Button>
+        </Form>
+      </Container>
 
-          <br />
-          <Button
-            onClick={handleGithubLogin}
-            className="m-4"
-            variant="outline-success"
-          >
-            Github sign-in
-          </Button>
-        </div>
-      )}
-      <br />
+      {/* google and github button */}
+
+      <div>
+        <br />
+        <Button
+          onClick={handleGoogleLogin}
+          className="m-2"
+          variant="outline-success"
+        >
+          Google sign-in
+        </Button>
+
+        <br />
+        <Button
+          onClick={handleGithubLogin}
+          className="m-2"
+          variant="outline-success"
+        >
+          Github sign-in
+        </Button>
+      </div>
       <Link to="/registration">
-        <p className="mt-4">New here? Go to Registration</p>
+        <p className="mt-2">New here? Go to Registration</p>
       </Link>
     </div>
   );
