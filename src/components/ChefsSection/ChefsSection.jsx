@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Card, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { DataContext } from "../ContextProvider/ContextProvider";
 
 const ChefsSection = ({ info }) => {
   const { name, picture, experience, num_recipes, likes } = info;
+
+  const infos = useContext(DataContext);
 
   return (
     <div>

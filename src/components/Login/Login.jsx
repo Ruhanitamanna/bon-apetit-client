@@ -1,22 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import {
-  GithubAuthProvider,
-  GoogleAuthProvider,
-  getAuth,
-  signInWithPopup,
-  signOut,
-} from "firebase/auth";
 import app from "../../Firebase/Firebase.config";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
 const Login = () => {
-  const { logIn } = useContext(AuthContext);
-  const [user, setUser] = useState(null);
-  const auth = getAuth(app);
-  const googleAuthProvider = new GoogleAuthProvider();
-  const githubAuthProvider = new GithubAuthProvider();
+  const { logIn, user, googleLogIn, githubLogIn } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -29,37 +20,22 @@ const Login = () => {
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
       });
   };
   const handleGoogleLogin = () => {
-    signInWithPopup(auth, googleAuthProvider)
-      .then((result) => {
-        const loggedInUser = result.user;
-        console.log(loggedInUser);
-        setUser(loggedInUser);
-      })
-      .catch((error) => {
-        console.log("error", error.message);
-      });
+    return googleLogIn();
   };
   const handleGithubLogin = () => {
-    signInWithPopup(auth, githubAuthProvider)
-      .then((result) => {
-        const loggedInUser = result.user;
-        console.log(loggedInUser);
-        setUser(loggedInUser);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    return githubLogIn();
   };
 
   return (
-    <div className="mx-auto w-50 mt-5 ">
-      <h2>Log in options</h2>
+    <div className="mx-auto w-50 my-5 p-5 ">
+      <h2>Please Log In</h2>
 
       <Container>
         <Form onSubmit={handleLogin}>
@@ -87,23 +63,25 @@ const Login = () => {
 
       {/* google and github button */}
 
-      <div>
+      <div className="mx-auto">
         <br />
         <Button
           onClick={handleGoogleLogin}
-          className="m-2"
+          className="m-2 text-primary"
           variant="outline-success"
         >
-          Google sign-in
+          <FaGoogle></FaGoogle>
+          <span className="p-1"> Google sign-in</span>
         </Button>
 
         <br />
         <Button
           onClick={handleGithubLogin}
-          className="m-2"
+          className="m-2 text-primary"
           variant="outline-success"
         >
-          Github sign-in
+          <FaGithub></FaGithub>
+          <span className="p-1">Github sign-in</span>
         </Button>
       </div>
       <Link to="/registration">

@@ -3,10 +3,19 @@ import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ActiveLink from "../ActiveLink/ActiveLink";
 import { AuthContext } from "../Providers/AuthProvider";
-import { FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then()
+      .catch((error) => {
+        console.log(error);
+      });
+    return;
+  };
+
   return (
     <div>
       <Navbar bg="dark" variant="dark">
@@ -29,23 +38,36 @@ const Header = () => {
             <h1>Bon Appétit</h1>
           </Navbar.Brand>
 
-          {user && (
-            <Nav.Link className="text-white" href="#deets">
-              <FaUserCircle />
-            </Nav.Link>
-          )}
+          <div className="d-flex justify-content-around">
+            <div className="p-2">
+              {user && (
+                <div className="text-white">
+                  <img
+                    style={{ height: "20px", width: "20px" }}
+                    src={user?.photoURL}
+                  />
+                </div>
+              )}
+            </div>
 
-          {user ? (
-            <Button type="button" className="btn btn-success">
-              Log out
-            </Button>
-          ) : (
-            <Link to="/login">
-              <Button type="button" className="btn btn-success">
-                Login
-              </Button>
-            </Link>
-          )}
+            <div className="p-2">
+              {user ? (
+                <Button
+                  onClick={handleLogOut}
+                  type="button"
+                  className="btn btn-success"
+                >
+                  Log out
+                </Button>
+              ) : (
+                <Link to="/login">
+                  <Button type="button" className="btn btn-success">
+                    Login
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </div>
         </Container>
       </Navbar>
     </div>

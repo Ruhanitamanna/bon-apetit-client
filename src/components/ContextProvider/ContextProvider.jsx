@@ -1,18 +1,22 @@
 import React, { createContext, useEffect, useState } from "react";
-import ChefsSection from "../ChefsSection/ChefsSection";
+
 import Chefs from "../Chefs/Chefs";
 
-const DataContext = createContext();
+export const DataContext = createContext();
 
 const ContextProvider = () => {
-  const [infos, setInfos] = useState(null);
+  const [infos, setInfos] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/data")
+    fetch("https://bon-apetit-server-ruhanitamanna.vercel.app/data")
       .then((res) => res.json())
-      .then((data) => setInfos(data))
+      .then((data) => {
+        setInfos(data);
+        console.log(data);
+      })
       .catch((error) => console.error(error));
   }, []);
+
   return (
     <div>
       <DataContext.Provider value={infos}>

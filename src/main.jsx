@@ -8,9 +8,10 @@ import Main from "./layout/Main.jsx";
 import Blog from "./components/Blog/Blog.jsx";
 import Login from "./components/Login/Login.jsx";
 import Registration from "./components/Registration/Registration.jsx";
-import RecipePage from "./components/RecipePage/RecipePage.jsx";
+// import RecipePage from "./components/RecipePage/RecipePage.jsx";
 import ErrorPage from "./components/ErrorPage/ErrorPage.jsx";
 import AuthProvider from "./components/Providers/AuthProvider";
+import RecipePage from "./components/RecipePage/RecipePage";
 
 const router = createBrowserRouter([
   {
@@ -34,8 +35,10 @@ const router = createBrowserRouter([
         element: <Registration></Registration>,
       },
       {
-        path: "/recipePage",
+        path: "/recipePage/:id",
         element: <RecipePage></RecipePage>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/data/${params.id}`),
       },
       {
         path: "*",

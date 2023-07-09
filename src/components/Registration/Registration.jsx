@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { AuthContext } from "../Providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -12,11 +14,23 @@ const Registration = () => {
     const email = form.email.value;
     const password = form.password.value;
 
+    if (email === "") {
+      return alert("Email is required.");
+    }
+
+    if (password === "") {
+      alert("Password is required.");
+      return;
+    } else if (password.length < 6) {
+      alert("Password must be at least 6 characters.");
+    }
+
     console.log(name, photo, email, password);
     createUser(email, password)
       .then((result) => {
         const createdUser = result.user;
         console.log(createdUser);
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
